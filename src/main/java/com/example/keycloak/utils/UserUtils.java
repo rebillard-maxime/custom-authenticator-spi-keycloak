@@ -6,6 +6,9 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.models.utils.KeycloakModelUtils;
 
+/**
+ * Util class meant to extends (functionally) the KeycloakModelUtils by adding the search user by the attribute "EMAIL"
+ */
 public class UserUtils {
 
   private static final String ATTR_EMAIL_KEY = "EMAIL";

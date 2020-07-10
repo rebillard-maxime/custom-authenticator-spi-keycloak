@@ -87,6 +87,7 @@ public class DemoWDGUserPasswordFormProviderFactory implements AuthenticatorFact
     return REQUIREMENT_CHOICES;
   }
 
+
   @Override
   public String getDisplayType() {
     return "WDG Username Password Form";

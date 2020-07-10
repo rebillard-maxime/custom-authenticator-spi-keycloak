@@ -9,23 +9,29 @@ import org.keycloak.authentication.authenticators.browser.AbstractUsernameFormAu
 import org.keycloak.authentication.authenticators.browser.UsernamePasswordForm;
 import org.keycloak.events.Details;
 import org.keycloak.events.Errors;
+import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.ModelDuplicateException;
+import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.services.ServicesLogger;
 import org.keycloak.services.managers.AuthenticationManager;
 import org.keycloak.services.messages.Messages;
 
+/**
+ * UserPassWordFrom provider : the username can be the user name or email or the "EMAIL" attribute"
+ */
 public class DemoWDGUserPasswordFormProvider extends UsernamePasswordForm {
-
-
-// override methods below
-
 
   @Override
   public boolean validateUserAndPassword(AuthenticationFlowContext context, MultivaluedMap<String, String> inputData)  {
     context.clearUser();
     UserModel user = getUser(context, inputData);
     return user != null && validatePassword(context, user, inputData) && validateUser(context, user, inputData);
+  }
+
+  @Override
+  public void setRequiredActions(KeycloakSession session, RealmModel realm, UserModel user) {
+    user.addRequiredAction(UserModel.RequiredAction.UPDATE_PASSWORD);
   }
 
   @Override
